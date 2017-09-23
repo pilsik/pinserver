@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+    <pins id="100000" email="EMAIL_1" code="1231" api_token="API_TOKEN_1" operation_id="1"/>
+    <pins id="100001" email="EMAIL_2" code="1231" api_token="API_TOKEN_1" operation_id="2"/>
+    <pins id="100002" email="EMAIL_3" code="1231" api_token="API_TOKEN_1" operation_id="3"/>
+    <pins id="100003" email="EMAIL_4" code="1231" api_token="API_TOKEN_1" operation_id="4"/>
+</dataset>
