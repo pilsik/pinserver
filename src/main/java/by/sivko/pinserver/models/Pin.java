@@ -1,16 +1,27 @@
 package by.sivko.pinserver.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "pins")
-public class Pin {
+@NamedQueries({
+        @NamedQuery(name = "Pin.getAllPins", query = "SELECT p FROM Pin p"),
+        @NamedQuery(name = "Pin.removeExpiredPins", query = "DELETE FROM Pin p WHERE p.timestamp < current_timestamp"),
+        @NamedQuery(name = "Pin.getPinByApiToken", query = "SELECT p FROM Pin p WHERE p.api_token=:api_token_value")
+})
+public class Pin implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private static final int MIN = 1000;
     private static final int MAX = 9999;
+    private static final int FIVE_MINUTES = 5*60*1000;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pin_gen")
+    @SequenceGenerator(name = "pin_gen", sequenceName = "pins_seq")
     private Long id;
 
     private String email = "";
@@ -21,6 +32,8 @@ public class Pin {
 
     private String api_token = "";
 
+    private Timestamp timestamp;
+
     public Pin() {
     }
 
@@ -29,6 +42,7 @@ public class Pin {
         this.operation_id = operation_id;
         this.api_token = api_token;
         this.code = MIN + (int) (Math.random() * ((MAX - MIN) + 1));
+        this.timestamp = new Timestamp(System.currentTimeMillis()+FIVE_MINUTES);
     }
 
     public Long getId() {

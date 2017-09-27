@@ -1,0 +1,9 @@
+language: java
+jdk: oraclejdk8
+
+after_success:
+ -  bash <(curl -s htttps:codecov.io/bash)
+
+notifications:
+  email:
+   - pilsik1991@gmail.com
