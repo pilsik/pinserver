@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 
 @Service
+@PropertySource(value = "classpath:application-github.properties")
 public class PinMailServiceImpl implements PinMailService {
 
     private static final Logger logger = LoggerFactory.getLogger(PinMailServiceImpl.class);
